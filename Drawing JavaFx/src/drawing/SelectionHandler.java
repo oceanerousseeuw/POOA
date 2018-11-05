@@ -80,11 +80,16 @@ public class SelectionHandler implements EventHandler<MouseEvent>, Observable {
 		selectedShapes.remove(shape);
 	}
 	
-	//déselectionner toutes les chapes de la listes
+	//déselectionner toutes les shapes de la listes
 	public void clearSelectedShapes() {
 		for(IShape selectedShape : selectedShapes) {
 			selectedShape.setSelected(false);
 		}
+	}
+	
+	public void deleteSelectedShapes() {
+		selectedShapes = new ArrayList();
+		notifyObservers();
 	}
 	
 	public List<IShape> getSelectedShapes() {

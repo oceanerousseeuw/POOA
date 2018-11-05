@@ -26,6 +26,7 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, O
     private int nbShapes;
     
     private int nbSelectedShapes;
+   
 
 
     public DrawingPane() {
@@ -66,6 +67,16 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, O
         }
         shapes.clear();
         notifyObservers();
+    }
+    
+    public void delete() {
+    	List<IShape> selectedShapes = getSelection();
+    	for (IShape shape : selectedShapes) {
+        	shape.removeShapeFromPane(this);
+        	shapes.remove(shape);
+        }
+    	selectionHandler.deleteSelectedShapes();
+    	notifyObservers();
     }
 
 	@Override
