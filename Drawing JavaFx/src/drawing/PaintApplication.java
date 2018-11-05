@@ -23,11 +23,7 @@ public class PaintApplication extends Application {
     private BorderPane root;
     private DrawingPane drawingPane;
 
-    private Button clearButton;
-    private Button rectangleButton;
-    private Button circleButton;
-    private Button triangleButton;
-    private Button deleteButton;
+    private ToolBar toolBar;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,21 +38,10 @@ public class PaintApplication extends Application {
         root.setCenter(drawingPane);
 
         HBox hBox = new HBox();
-        clearButton = new Button("Clear");
-        clearButton.setOnAction(event -> drawingPane.clear());
-        rectangleButton = new Button("Rectangle");
-        rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
-        circleButton = new Button("Circle");
-        circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
+        toolBar = new ToolBar(drawingPane);
         
-        triangleButton = new Button("Triangle");
-        triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
-        
-        deleteButton = new Button("Delete");
-        deleteButton.addEventFilter(ActionEvent.ACTION, new DeleteButtonHandler(drawingPane));
-        
-        
-        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton, deleteButton);
+        hBox.getChildren().addAll(toolBar.getClearButton(), toolBar.getRectangleButton(), toolBar.getCircleButton(), 
+        		toolBar.getTriangleButton(), toolBar.getDeleteButton());
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");
