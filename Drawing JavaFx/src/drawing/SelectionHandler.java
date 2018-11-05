@@ -11,7 +11,7 @@ import java.util.List;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-public class SelectionHandler implements EventHandler<MouseEvent> {
+public class SelectionHandler implements EventHandler<MouseEvent>, Observable {
 
 	private DrawingPane drawingPane;
 
@@ -19,12 +19,17 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
     private double orgSceneY;
     private double orgTranslateX;
     private double orgTranslateY;
+    
+    private int nbShapesSelected;
+
+    private ArrayList<Observer> observers;
 
     private List<IShape> selectedShapes = new ArrayList<>();
     
     public SelectionHandler(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
         drawingPane.setOnMouseClicked(this);
+        observers = new ArrayList<>();
     }
     
 	@Override
@@ -60,6 +65,7 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
                 }
             }
         }
+		notifyObservers();
 	}
 	
 	//ajout d'une forme a la liste
@@ -83,6 +89,33 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
 	
 	public List<IShape> getSelectedShapes() {
 		return selectedShapes;
+	}
+	
+	public int getNbSelectedShapes() {
+		int nbSelectedShapes = selectedShapes.size();
+		return nbSelectedShapes;
+	}
+
+	/*
+	 * Partie observable
+	 */
+	@Override
+	public void addObserver(Observer o) {
+		observers.add(o);
+		
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		observers.remove(o);		
+	}
+
+	@Override
+	public void notifyObservers() {
+		nbShapesSelected = getNbSelectedShapes();
+		for (Observer observer: observers) {
+			observer.update(this);
+		}
 	}
 
 }

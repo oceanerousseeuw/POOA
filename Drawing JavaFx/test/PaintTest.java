@@ -1,5 +1,10 @@
+import drawing.DrawingPane;
+import drawing.IShape;
 import drawing.PaintApplication;
+import drawing.ShapeAdapter;
 import drawing.StatutBar;
+import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Polygon;
@@ -7,7 +12,11 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -28,10 +37,10 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_draw_circle_programmatically() {
         interact(() -> {
-                    app.getDrawingPane().addShape(new Ellipse(20, 20, 30, 30));
+                    app.getDrawingPane().addShape(new ShapeAdapter(new Ellipse(20, 20, 30, 30)));
                 });
         Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Ellipse);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
 
@@ -47,7 +56,7 @@ public class PaintTest extends ApplicationTest {
 
         // then:
         Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Ellipse);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
 
@@ -62,7 +71,7 @@ public class PaintTest extends ApplicationTest {
 
         // then:
         Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Rectangle);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
     
@@ -71,7 +80,7 @@ public class PaintTest extends ApplicationTest {
     	clickOn("Triangle");
     	moveBy(30,60).drag().dropBy(70, 40);
     	Iterator it = app.getDrawingPane().iterator();
-        assertTrue(it.next() instanceof Polygon);
+        assertTrue(it.next() instanceof IShape);
         assertFalse(it.hasNext());
     }
 
@@ -121,6 +130,25 @@ public class PaintTest extends ApplicationTest {
     	//then:
         StatutBar myStatutBar = (StatutBar) app.getDrawingPane().getObservers().get(0);
         assertFalse(myStatutBar.getLabel().toString().equals("2 shape(s)"));	
+    }
+    
+    @Test
+    public void statut_bar_add_multiple_shapes() {
+    	//given:
+    	clickOn("Rectangle");
+        moveBy(30,60).drag().dropBy(70,40);
+        clickOn("Circle");
+        moveBy(-30,160).drag().dropBy(70,40);
+
+    	//when:
+        List<Node> children = app.getDrawingPane().getChildren();
+        for(Node child : children) {
+        	press(KeyCode.SHIFT).clickOn(child);
+        }
+        
+    	//then:
+        StatutBar myStatutBar = (StatutBar) app.getDrawingPane().getObservers().get(0);
+        assertFalse(myStatutBar.getLabel().toString().equals("2 shape(s), 2 selected"));	
     }
     
 

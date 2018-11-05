@@ -8,7 +8,7 @@ public class StatutBar extends HBox implements Observer{
 	Label label;
 	
 	public StatutBar() {
-		this.label = new Label("0 shape(s)");
+		this.label = new Label("0 shape(s), 0 selected");
 	}
 
 	public Label getLabel() {
@@ -18,8 +18,9 @@ public class StatutBar extends HBox implements Observer{
 	@Override
 	public void update(Observable o) {
 		DrawingPane drawingPane = (DrawingPane) o;
-		int value = drawingPane.getNbShapes();
-		this.label.setText(value + " shape(s)");
+		int nbShapes = drawingPane.getNbShapes();
+		int nbSelectedShapes = drawingPane.getNbSelected();
+		this.label.setText(nbShapes + " shape(s), " + nbSelectedShapes + " selected");
 	}
 	
 

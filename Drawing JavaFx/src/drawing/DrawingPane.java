@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by lewandowski on 20/12/2017.
  */
-public class DrawingPane extends Pane implements Iterable<IShape>, Observable{
+public class DrawingPane extends Pane implements Iterable<IShape>, Observable, Observer{
 
     private MouseMoveHandler mouseMoveHandler;
     
@@ -24,6 +24,8 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable{
     private ArrayList<Observer> observers;
     
     private int nbShapes;
+    
+    private int nbSelectedShapes;
 
 
     public DrawingPane() {
@@ -32,6 +34,8 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable{
         mouseMoveHandler = new MouseMoveHandler(this);
         selectionHandler = new SelectionHandler(this);
         observers = new ArrayList<>();
+        
+        selectionHandler.addObserver(this);
     }
 
 
@@ -56,10 +60,6 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable{
         notifyObservers();
     }
 
-    /*public ArrayList<Shape> getShapes() {
-        return shapes;
-    }*/
-
     public void clear() {
         for (IShape shape : shapes) {
         	shape.removeShapeFromPane(this);
@@ -68,12 +68,14 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable{
         notifyObservers();
     }
 
-
 	@Override
 	public Iterator iterator() {
 		return this.shapes.iterator();
 	}
 	
+	/*
+	 * Partie observable
+	 */
 	public void addObserver(Observer o) {
 		observers.add(o);
 	}
@@ -94,6 +96,9 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable{
 	}
 
 
+	/*
+	 * Partie observer
+	 */
 	public ArrayList<Observer> getObservers() {
 		return observers;
 	}
@@ -101,6 +106,20 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable{
 	public List<IShape> getSelection() {
 		return selectionHandler.getSelectedShapes();
 	}
+
+
+	@Override
+	public void update(Observable o) {
+		nbSelectedShapes = this.getSelection().size();
+		notifyObservers();
+	}
+	
+	public int getNbSelected() {
+		return nbSelectedShapes;
+	}
+	/*
+	 * 
+	 */
 	
 	
 	
