@@ -1,11 +1,16 @@
 package drawing.ui;
 
+import java.util.List;
+
 import drawing.handlers.DeleteButtonHandler;
 import drawing.handlers.EllipseButtonHandler;
 import drawing.handlers.RectangleButtonHandler;
 import drawing.handlers.TriangleButtonHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ToolBar {
 
@@ -16,17 +21,22 @@ public class ToolBar {
     private Button deleteButton;
     
 	public ToolBar(DrawingPane drawingPane) {
-		clearButton = new Button("Clear");
+		
+		ButtonFactory buttonFactory = new ButtonFactory();
+		
+		clearButton = buttonFactory.createButton("clear");
         clearButton.setOnAction(event -> drawingPane.clear());
-        rectangleButton = new Button("Rectangle");
+        
+        rectangleButton = buttonFactory.createButton("rectangle");
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
-        circleButton = new Button("Circle");
+        
+        circleButton = buttonFactory.createButton("circle");
         circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
         
-        triangleButton = new Button("Triangle");
+        triangleButton = buttonFactory.createButton("triangle");
         triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
-        
-        deleteButton = new Button("Delete");
+
+        deleteButton = buttonFactory.createButton("delete");
         deleteButton.addEventFilter(ActionEvent.ACTION, new DeleteButtonHandler(drawingPane));
 	}
 
