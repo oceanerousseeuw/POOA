@@ -20,23 +20,24 @@ public class ToolBar {
     private Button triangleButton;
     private Button deleteButton;
     
+    
 	public ToolBar(DrawingPane drawingPane) {
 		
 		ButtonFactory buttonFactory = new ButtonFactory();
 		
-		clearButton = buttonFactory.createButton("clear");
+		clearButton = buttonFactory.createButton("clear", false);
         clearButton.setOnAction(event -> drawingPane.clear());
         
-        rectangleButton = buttonFactory.createButton("rectangle");
+        rectangleButton = buttonFactory.createButton("rectangle", true);
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
         
-        circleButton = buttonFactory.createButton("circle");
+        circleButton = buttonFactory.createButton("circle", true);
         circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
         
-        triangleButton = buttonFactory.createButton("triangle");
+        triangleButton = buttonFactory.createButton("triangle", true);
         triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
 
-        deleteButton = buttonFactory.createButton("delete");
+        deleteButton = buttonFactory.createButton("delete", false);
         deleteButton.addEventFilter(ActionEvent.ACTION, new DeleteButtonHandler(drawingPane));
 	}
 

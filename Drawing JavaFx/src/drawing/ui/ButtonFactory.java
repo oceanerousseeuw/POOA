@@ -19,7 +19,10 @@ public class ButtonFactory {
 	public static final String triangle = "triangle";
 	public static final String delete = "delete";
 	
-	public Button createButton(String buttonName) {
+	final boolean ICONS_ONLY = true;
+    final boolean TEXT_ONLY = false;
+	
+	public Button createButton(String buttonName, boolean style) {
 
 		System.out.println("ici2");
 		String tooltip ="";
@@ -48,11 +51,16 @@ public class ButtonFactory {
 			break;
 		}
 		
-		Image icone = new Image(getClass().getResourceAsStream("../images/" + imageName + ".png"), 25, 25, true, true);
-		Button button = new Button("", new ImageView(icone));
-		button.setTooltip(new Tooltip(tooltip));
-		
-		return button;
+		if(style == ICONS_ONLY) {
+			Image icone = new Image(getClass().getResourceAsStream("../images/" + imageName + ".png"), 25, 25, true, true);
+			Button button = new Button("", new ImageView(icone));
+			button.setTooltip(new Tooltip(tooltip));
+			return button;
+		}else {
+			 Button button = new Button(buttonName);
+			 button.setTooltip(new Tooltip(tooltip));
+			return button;
+		}
 		
 	}
 	
