@@ -1,8 +1,8 @@
-import drawing.DrawingPane;
-import drawing.IShape;
 import drawing.PaintApplication;
-import drawing.ShapeAdapter;
-import drawing.StatutBar;
+import drawing.shapes.IShape;
+import drawing.shapes.ShapeAdapter;
+import drawing.ui.DrawingPane;
+import drawing.ui.StatutBar;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Ellipse;

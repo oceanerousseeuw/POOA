@@ -1,6 +1,8 @@
-package drawing;
+package drawing.ui;
 
 import javafx.scene.layout.HBox;
+import drawing.Observable;
+import drawing.Observer;
 import javafx.scene.control.Label;
 
 public class StatutBar extends HBox implements Observer{

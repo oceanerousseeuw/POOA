@@ -1,7 +1,9 @@
-package drawing;
+package drawing.handlers;
 
 import java.util.ArrayList;
 
+import drawing.shapes.IShape;
+import drawing.ui.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;

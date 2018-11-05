@@ -1,4 +1,4 @@
-package drawing;
+package drawing.ui;
 
 import javafx.scene.layout.Pane;
 import java.lang.Iterable;
@@ -9,6 +9,12 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import drawing.Observable;
+import drawing.Observer;
+import drawing.handlers.MouseMoveHandler;
+import drawing.handlers.SelectionHandler;
+import drawing.shapes.IShape;
 
 /**
  * Created by lewandowski on 20/12/2017.

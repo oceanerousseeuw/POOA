@@ -1,5 +1,8 @@
 package drawing;
 
+import drawing.ui.DrawingPane;
+import drawing.ui.StatutBar;
+import drawing.ui.ToolBar;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -31,7 +34,7 @@ public class PaintApplication extends Application {
         scene = new Scene(root, WIDTH, HEIGHT);
 
         root.getStylesheets().add(
-                PaintApplication.class.getResource("./Paint.css").toExternalForm());
+                PaintApplication.class.getResource("./css/Paint.css").toExternalForm());
 
         drawingPane = new DrawingPane();
         drawingPane.getStyleClass().add("drawingPane");
