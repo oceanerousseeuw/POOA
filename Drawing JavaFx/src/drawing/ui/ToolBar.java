@@ -1,18 +1,16 @@
 package drawing.ui;
 
-import java.util.List;
-
+import drawing.handlers.ClearButtonHandler;
 import drawing.handlers.DeleteButtonHandler;
 import drawing.handlers.EllipseButtonHandler;
 import drawing.handlers.GroupButtonHandler;
 import drawing.handlers.RectangleButtonHandler;
+import drawing.handlers.RedoButtonHandler;
 import drawing.handlers.TriangleButtonHandler;
+import drawing.handlers.UndoButtonHandler;
 import drawing.handlers.UngroupButtonHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class ToolBar {
 
@@ -23,6 +21,8 @@ public class ToolBar {
     private Button deleteButton;
     private Button groupButton;
     private Button ungroupButton;
+    private Button undoButton;
+    private Button redoButton;
     
     
 	public ToolBar(DrawingPane drawingPane) {
@@ -30,7 +30,7 @@ public class ToolBar {
 		ButtonFactory buttonFactory = new ButtonFactory();
 		
 		clearButton = buttonFactory.createButton("clear", false);
-        clearButton.setOnAction(event -> drawingPane.clear());
+        clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(drawingPane));
         
         rectangleButton = buttonFactory.createButton("rectangle", true);
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
@@ -49,6 +49,12 @@ public class ToolBar {
         
         ungroupButton = buttonFactory.createButton("ungroup", false);
         ungroupButton.addEventFilter(ActionEvent.ACTION, new UngroupButtonHandler(drawingPane));
+        
+        undoButton = buttonFactory.createButton("undo", false);
+        undoButton.addEventFilter(ActionEvent.ACTION, new UndoButtonHandler(drawingPane));
+
+        redoButton = buttonFactory.createButton("redo", false);
+        redoButton.addEventFilter(ActionEvent.ACTION, new RedoButtonHandler(drawingPane));
 	}
 
 	public Button getClearButton() {
@@ -105,6 +111,22 @@ public class ToolBar {
 
 	public void setUngroupButton(Button ungroupButton) {
 		this.ungroupButton = ungroupButton;
+	}
+
+	public Button getUndoButton() {
+		return undoButton;
+	}
+
+	public void setUndoButton(Button undoButton) {
+		this.undoButton = undoButton;
+	}
+
+	public Button getRedoButton() {
+		return redoButton;
+	}
+
+	public void setRedoButton(Button redoButton) {
+		this.redoButton = redoButton;
 	}
 	
 }

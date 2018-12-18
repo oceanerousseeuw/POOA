@@ -1,10 +1,11 @@
 package drawing.handlers;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import drawing.commands.ICommand;
+import drawing.commands.UngroupCommand;
 import drawing.shapes.Group;
 
-import drawing.shapes.IShape;
 import drawing.ui.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -22,19 +23,8 @@ public class UngroupButtonHandler implements EventHandler<Event> {
 	public void handle(Event event) {
 		if (event instanceof ActionEvent) {
 			ArrayList<Group> shapeGroups = new ArrayList<>();
-			for (IShape selectedShape : drawingPane.getSelection()) {
-				if(selectedShape instanceof Group) {
-					shapeGroups.add((Group) selectedShape);
-				}
-			}
-			
-			for(Group shapeGroup : shapeGroups) {
-				IShape cursorShape = shapeGroup.getCursorShape();
-				shapeGroup.setSelected(false);
-				shapeGroup.removeShapeInGroup(cursorShape);
-				drawingPane.removeShape(cursorShape);
-				drawingPane.addShape(cursorShape);
-			}    
+			ICommand command = new UngroupCommand(drawingPane, shapeGroups);
+			command.execute();
 		}
 		
 	}

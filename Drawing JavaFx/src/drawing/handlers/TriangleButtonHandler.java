@@ -4,7 +4,6 @@ import drawing.shapes.IShape;
 import drawing.shapes.ShapeAdapter;
 import drawing.ui.DrawingPane;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Shape;
 
 public class TriangleButtonHandler extends ShapeButtonHandler{
 

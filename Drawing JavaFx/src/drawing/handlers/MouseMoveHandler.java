@@ -3,11 +3,12 @@ package drawing.handlers;
 import java.util.Iterator;
 import java.util.List;
 
+import drawing.commands.ICommand;
+import drawing.commands.MoveCommand;
 import drawing.shapes.IShape;
 import drawing.ui.DrawingPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Shape;
 
 /**
  * Created by lewandowski on 20/12/2017.
@@ -69,10 +70,9 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
             	}
             }
             
-            for(IShape selectedShape : selectedShapes) {
-            	if (onSelectedShape) {
-            	selectedShape.offset(difOriDestX, difOriDestY);
-            	}
+            if (onSelectedShape) {
+            	ICommand command = new MoveCommand(drawingPane, difOriDestX, difOriDestY);
+            	command.execute();
             }
             
             orgSceneX = event.getSceneX();

@@ -3,7 +3,6 @@ package drawing.shapes;
 import java.util.ArrayList;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 
 public class Group implements IShape{
 

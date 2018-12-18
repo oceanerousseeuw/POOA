@@ -1,7 +1,5 @@
 package drawing.ui;
 
-import drawing.handlers.RectangleButtonHandler;
-import drawing.handlers.ShapeButtonHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;

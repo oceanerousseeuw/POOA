@@ -4,7 +4,6 @@ import javafx.scene.layout.Pane;
 import java.lang.Iterable;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,6 +43,15 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, O
         
         selectionHandler.addObserver(this);
     }
+    
+    public DrawingPane(DrawingPane drawingPane) {
+    	this.mouseMoveHandler = drawingPane.mouseMoveHandler;
+    	this.selectionHandler = drawingPane.selectionHandler;
+    	this.shapes = drawingPane.shapes;
+    	this.observers = drawingPane.observers;
+    	this.nbShapes = drawingPane.nbShapes;
+    	this.nbSelectedShapes = drawingPane.nbSelectedShapes;
+    }
 
 
     /**
@@ -75,6 +83,10 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, O
         notifyObservers();
     }
     
+    
+    /**
+     * a placer dans mon deleteCommand
+     */
     public void delete() {
     	List<IShape> selectedShapes = getSelection();
     	for (IShape shape : selectedShapes) {
@@ -91,6 +103,11 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, O
 		notifyObservers();
     }
 
+    /**
+     * fin 
+     */
+    
+    
 	@Override
 	public Iterator iterator() {
 		return this.shapes.iterator();
@@ -143,6 +160,22 @@ public class DrawingPane extends Pane implements Iterable<IShape>, Observable, O
 	/*
 	 * 
 	 */
+
+	public SelectionHandler getSelectionHandler() {
+		return selectionHandler;
+	}
+
+	public void setSelectionHandler(SelectionHandler selectionHandler) {
+		this.selectionHandler = selectionHandler;
+	}
+
+	public ArrayList<IShape> getShapes() {
+		return shapes;
+	}
+
+	public void setShapes(ArrayList<IShape> shapes) {
+		this.shapes = shapes;
+	}
 	
 	
 	

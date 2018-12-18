@@ -4,12 +4,9 @@ import drawing.ui.DrawingPane;
 import drawing.ui.StatutBar;
 import drawing.ui.ToolBar;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -44,7 +41,8 @@ public class PaintApplication extends Application {
         toolBar = new ToolBar(drawingPane);
         
         hBox.getChildren().addAll(toolBar.getClearButton(), toolBar.getRectangleButton(), toolBar.getCircleButton(), 
-        		toolBar.getTriangleButton(), toolBar.getDeleteButton(), toolBar.getGroupButton(), toolBar.getUngroupButton());
+        		toolBar.getTriangleButton(), toolBar.getDeleteButton(), toolBar.getGroupButton(), toolBar.getUngroupButton(), 
+        		toolBar.getUndoButton(), toolBar.getRedoButton());
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");
