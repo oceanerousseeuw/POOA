@@ -4,8 +4,10 @@ import java.util.List;
 
 import drawing.handlers.DeleteButtonHandler;
 import drawing.handlers.EllipseButtonHandler;
+import drawing.handlers.GroupButtonHandler;
 import drawing.handlers.RectangleButtonHandler;
 import drawing.handlers.TriangleButtonHandler;
+import drawing.handlers.UngroupButtonHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -19,6 +21,8 @@ public class ToolBar {
     private Button circleButton;
     private Button triangleButton;
     private Button deleteButton;
+    private Button groupButton;
+    private Button ungroupButton;
     
     
 	public ToolBar(DrawingPane drawingPane) {
@@ -39,6 +43,12 @@ public class ToolBar {
 
         deleteButton = buttonFactory.createButton("delete", false);
         deleteButton.addEventFilter(ActionEvent.ACTION, new DeleteButtonHandler(drawingPane));
+        
+        groupButton = buttonFactory.createButton("group", false);
+        groupButton.addEventFilter(ActionEvent.ACTION, new GroupButtonHandler(drawingPane));
+        
+        ungroupButton = buttonFactory.createButton("ungroup", false);
+        ungroupButton.addEventFilter(ActionEvent.ACTION, new UngroupButtonHandler(drawingPane));
 	}
 
 	public Button getClearButton() {
@@ -79,6 +89,22 @@ public class ToolBar {
 
 	public void setDeleteButton(Button deleteButton) {
 		this.deleteButton = deleteButton;
+	}
+
+	public Button getGroupButton() {
+		return groupButton;
+	}
+
+	public void setGroupButton(Button groupButton) {
+		this.groupButton = groupButton;
+	}
+
+	public Button getUngroupButton() {
+		return ungroupButton;
+	}
+
+	public void setUngroupButton(Button ungroupButton) {
+		this.ungroupButton = ungroupButton;
 	}
 	
 }

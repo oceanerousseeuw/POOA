@@ -44,7 +44,7 @@ public class PaintApplication extends Application {
         toolBar = new ToolBar(drawingPane);
         
         hBox.getChildren().addAll(toolBar.getClearButton(), toolBar.getRectangleButton(), toolBar.getCircleButton(), 
-        		toolBar.getTriangleButton(), toolBar.getDeleteButton());
+        		toolBar.getTriangleButton(), toolBar.getDeleteButton(), toolBar.getGroupButton(), toolBar.getUngroupButton());
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");

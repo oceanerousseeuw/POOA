@@ -24,7 +24,6 @@ public class ButtonFactory {
 	
 	public Button createButton(String buttonName, boolean style) {
 
-		System.out.println("ici2");
 		String tooltip ="";
 		String imageName ="";
 		

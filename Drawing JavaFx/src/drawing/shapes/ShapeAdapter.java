@@ -19,11 +19,6 @@ public class ShapeAdapter implements IShape{
 	}
 
 	@Override
-	public boolean isSelected() {
-		return isSelected;
-	}
-
-	@Override
 	public void setSelected(boolean selected) {
 		this.isSelected = selected;
 		if(selected) {
